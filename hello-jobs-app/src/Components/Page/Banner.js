@@ -1,11 +1,12 @@
 import React from 'react';
 import history from "../../utils/history";
+import { Button } from 'semantic-ui-react'
 
 function Banner() {
     return (
-        <div class="header">
+        <div class="headerBanner">
         <h1>Hello Jobs</h1>
-        <button
+        <Button
             className="bannerBtn"
             type="button"
             onClick={() => {
@@ -13,7 +14,7 @@ function Banner() {
             }}
           >
              Jobs
-          </button>
+          </Button>
       </div>
     )
 }

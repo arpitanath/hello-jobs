@@ -6,10 +6,11 @@
 .form-inner {
   border-radius: 5px;
   background-color: #f2f2f2;
-  margin: auto;
   width: 50%;
-  padding:10px;
+  padding:20px;
   margin:auto;
+  box-shadow: darkgray;
+  box-shadow: 10px 10px 5px grey;
 }
 
 .form-inner2 {
@@ -49,7 +50,7 @@ h2{
     text-align: center;
 }
 
-.header {
+.headerBanner {
     padding: 5px;
     text-align: center;
     background:#27432d;
@@ -70,7 +71,6 @@ h2{
 
   .form-freelancer{
     margin:30px;
-      
   }
 
   .form-freelancer > form{
@@ -91,22 +91,22 @@ h2{
     background-repeat: no-repeat;
   }
 
-  #customers {
+  table {
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     border-collapse: collapse;
     width: 100%;
   }
   
-  #customers td, #customers th {
+  table td, table th {
     border: 1px solid #ddd;
     padding: 8px;
   }
   
-  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  table tr:nth-child(even){background-color: #f2f2f2;}
   
-  #customers tr:hover {background-color: #ddd;}
+  table tr:hover {background-color: #ddd;}
   
-  #customers th {
+  table th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
@@ -137,3 +137,10 @@ h2{
       justify-content: space-around; 
     
   }
+
+  .card{
+    margin:30px;
+    box-shadow: 5px 5px 5px lightgrey;
+    padding:10px;
+  }
+  

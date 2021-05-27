@@ -3,7 +3,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
 import Freelancer from "./Components/Freelancer/Freelancer";
 import JobList from "./Components/Freelancer/JobDetails";
-import Form from "./Components/Login/Form";
+import SForm from "./Components/Login/Form";
 import Banner from "./Components/Page/Banner";
 import Footer from "./Components/Page/Footer";
 
@@ -14,7 +14,7 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route path="/" exact>
-            <Form />
+            <SForm />
           </Route>
           <Route path="/freelancer">
             <Freelancer />
@@ -24,7 +24,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      <Footer />
     </div>
   );
 }

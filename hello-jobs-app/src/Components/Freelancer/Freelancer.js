@@ -8,17 +8,17 @@ import Typography from "@material-ui/core/Typography";
 import About from "./About";
 import Skills from "./Skills";
 import Projects from "./Projects";
+import Experience from "./Experience";
 
 function Freelancer() {
   return (
     <>
       <div className="form-freelancer">
         <About />
-      </div>
-      <div class="btf">
+        <Experience/>
         <Skills />
-        <Projects />
-      </div>
+        <Projects /> 
+        </div>
     </>
   );
 }
