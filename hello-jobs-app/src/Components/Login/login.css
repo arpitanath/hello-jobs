@@ -140,7 +140,16 @@ h2{
 
   .card{
     margin:30px;
-    box-shadow: 5px 5px 5px lightgrey;
+    box-shadow: 5px 5px 5px grey;
     padding:10px;
   }
   
+  .job-list{
+    margin:40px;
+  }
+
+  .search-grid{
+    display:grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    grid-gap:15px;
+  }
