@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { Card, Button, Modal, Select, Form } from "semantic-ui-react";
 
-function Projects() {
+export function Projects() {
   const [open, setOpen] = React.useState(false);
-  const projects = [
-    "cart and checkout",
-    "minesweeper",
-    "tic tac toe",
-    "snake and ladders",
-    "sap hrms portal",
-    "procurement app"
-  ];
-  const [error, setError]=useState("");
+  const projects = ["minesweeper", "tic tac toe", "snake and ladders"];
+  const [error, setError] = useState("");
   const [projectsData, setProjects] = useState(projects);
   const [gitUser, setGitUser] = useState(false);
   const rows = [];
@@ -33,7 +26,6 @@ function Projects() {
         }
       })
       .then(data => {
-        
         for (let i = 0; i < data.length; i++) {
           console.log(data[i]);
           projectsData.push(data[i].name);
@@ -41,19 +33,17 @@ function Projects() {
         setProjects(projectsData);
         setOpen(false);
       })
-      .catch((e)=>{
+      .catch(e => {
         console.log(e);
         setOpen(true);
         setError(e.message);
       });
-
-     
   }
   return (
     <div className="card">
       <Card.Group>
-        <Card fluid header="Skills">
-          <Card.Content header="Skills" />
+        <Card fluid header="Git Hub Projects">
+          <Card.Content header="Git Hub Projects" />
           <table id="skills">{rows}</table>
           <Card.Content extra id="Experience">
             <Modal
@@ -61,7 +51,7 @@ function Projects() {
               onOpen={() => setOpen(true)}
               open={open}
               trigger={
-                <Button basic color="green">
+                <Button>
                   Add Projects from Git
                 </Button>
               }
@@ -70,7 +60,9 @@ function Projects() {
               <Modal.Content>
                 <Form>
                   <Form.Field>
-                    <span style={{ color: "red" }}>{error} :  Please try with valid userID</span>
+                    <span style={{ color: "red" }}>
+                      {error} : Please try with valid userID
+                    </span>
                     <label>Enter Git User Name</label>
                     <input
                       type="text"

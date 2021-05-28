@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import { Card, Button, Modal, Select, Form } from "semantic-ui-react";
 
-function Skills() {
+export function Skills() {
   const [open, setOpen] = React.useState(false);
   const skills = [
     "HTML",
@@ -38,7 +38,7 @@ function Skills() {
               onOpen={() => setOpen(true)}
               open={open}
               trigger={
-                <Button basic color="green">
+                <Button>
                   Add Skills
                 </Button>
               }
@@ -77,4 +77,4 @@ function Skills() {
   );
 }
 
-export default Skills;
+

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import history from "../../utils/history";
-import "./login.css";
 import { Button, Form, Select } from "semantic-ui-react";
 
-function SForm() {
+export function LoginForm() {
   const options = [
     { key: "f", text: "freelancer", value: "Freelancer" },
     { key: "e", text: "employer", value: "Employer" }
@@ -74,5 +73,3 @@ function onLogin(e) {
     </div>
   );
 }
-
-export default SForm;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button } from "semantic-ui-react";
 
-function Experience() {
+export function Experience() {
   const [isEditing, setIsEditing] = useState(false);
   return (
     <>
@@ -13,8 +13,6 @@ function Experience() {
           />
           <Card.Content extra id="Experience">
           {isEditing && <Button
-              basic
-              color="green"
               onClick={e => {
                 setIsEditing(false);
                e.target.parentElement.previousElementSibling.contentEditable = "false";
@@ -23,8 +21,6 @@ function Experience() {
               Save
             </Button>}
            {!isEditing &&  <Button
-              basic
-              color="green"
               onClick={e => {
                 setIsEditing(true);
                e.target.parentElement.previousElementSibling.contentEditable = "true";

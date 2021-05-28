@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Button, Icon, Table } from "semantic-ui-react";
 import { Modal, Form } from "semantic-ui-react";
 
-function Employer() {
+export function Employer() {
   const [data, setData] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [file, setFile] = React.useState("");
@@ -175,5 +175,3 @@ function Employer() {
     </div>
   );
 }
-
-export default Employer;
