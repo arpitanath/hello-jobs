@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import history from "../../utils/history";
 import Search from "./Search";
 import { Button, Table, Rating } from "semantic-ui-react";
-import { Icon, Label, Menu } from "semantic-ui-react";
+import { Icon, Message, Menu } from "semantic-ui-react";
 
 function JobList() {
   const pageSize = 5;
+  const [currentPage, setCurrentPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [indexPerPage, setIndexPerPage] = useState(4);
+  const [FirstIndex, setFirstIndex] = useState(0);
   const [currentList, setCurrentList] = useState([]);
-  const [interval, setInterval] = useState(1);
   const [jobs, setJobs] = useState([]);
   const [pageIndex, setPageIndex] = useState(0);
-  const intervals = jobs.length / pageSize;
-  let rows = [],
-    pagesButton = [],
+  const interval = jobs.length / pageSize;
+  const [menuItems, setMenuItems] = useState([]);
+  let pagesButton = [],
     newArr = [];
 
   useEffect(() => {
@@ -30,36 +33,19 @@ function JobList() {
       });
   });
 
-  function getCurrentList() {
-    newArr = [];
-    for (let i = pageIndex; i < pageSize; i++) {
-      newArr.push(jobs[i]);
-    }
-  }
-
-  
-
-  function getRows() {
-    rows = [];
-    getCurrentList();
-    newArr?.map(item => {
-      rows.push(
-        <Table.Row>
-          <Table.Cell>{item?.id}</Table.Cell>
-          <Table.Cell>{item?.Title}</Table.Cell>
-          <Table.Cell>{item?.Company}</Table.Cell>
-          <Table.Cell>{item?.industry}</Table.Cell>
-          <Table.Cell>{item?.salary}</Table.Cell>
-          <Table.Cell>
-            <Button basic color="green">
-              Apply
-            </Button>
-          </Table.Cell>
-        </Table.Row>
+  useEffect(() => {
+   let newarr=[]
+    for (let i = FirstIndex; i < FirstIndex+indexPerPage; i++) {
+     
+      newarr.push(
+        <Menu.Item as="a" onClick={() => setCurrentPage(i + 1)}>
+          {i + 1}
+        </Menu.Item>
       );
-    });
-  }
-  getRows();
+    }
+    setMenuItems(newarr);
+  }, [FirstIndex]);
+
 
   return (
     <>
@@ -78,19 +64,62 @@ function JobList() {
               <Table.HeaderCell>Options</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          <Table.Body>{rows}</Table.Body>
+          <Table.Body>
+            {" "}
+            {jobs &&
+              jobs
+                .slice(
+                  currentPage * rowsPerPage,
+                  currentPage * rowsPerPage + rowsPerPage
+                )
+                .map(item => (
+                  <Table.Row>
+                    <Table.Cell>{item?.id}</Table.Cell>
+                    <Table.Cell>{item?.Title}</Table.Cell>
+                    <Table.Cell>{item?.Company}</Table.Cell>
+                    <Table.Cell>{item?.industry}</Table.Cell>
+                    <Table.Cell>{item?.salary}</Table.Cell>
+                    <Table.Cell>
+                      <Button
+                        basic
+                        color="green"
+                        onClick={(e) => {
+                         e.target.innerText = `Applied SuccessFully to job ${item.id}`
+                         e.target.disabled=true;
+                        }}
+                      >
+                        Apply
+                      </Button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+          </Table.Body>
           <Table.Footer>
             <Table.Row>
               <Table.HeaderCell colSpan="6">
                 <Menu floated="right" pagination>
-                  <Menu.Item as="a" icon>
+                  <Menu.Item
+                    as="a"
+                    onClick={() => {
+                      if (currentPage !== 0) {
+                        setFirstIndex(FirstIndex + indexPerPage);
+                      }
+                    }}
+                    icon
+                  >
                     <Icon name="chevron left" />
                   </Menu.Item>
-                  <Menu.Item as="a">1</Menu.Item>
-                  <Menu.Item as="a">2</Menu.Item>
-                  <Menu.Item as="a">3</Menu.Item>
-                  <Menu.Item as="a">4</Menu.Item>
-                  <Menu.Item as="a" icon>
+                  {menuItems.map(item => item)}
+                  <Menu.Item
+                    as="a"
+                    onClick={() => {
+                      if (currentPage !== jobs.length - 1) {
+                        setFirstIndex(FirstIndex + indexPerPage);
+                        console.log(FirstIndex);
+                      }
+                    }}
+                    icon
+                  >
                     <Icon name="chevron right" />
                   </Menu.Item>
                 </Menu>
