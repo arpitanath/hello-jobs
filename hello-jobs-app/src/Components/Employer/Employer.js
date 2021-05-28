@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import _ from "lodash";
 import { Button, Icon, Table, Modal, Form, Card } from "semantic-ui-react";
-import { useGetEmployerJobs } from "../../hooks/useGetEmployerJobs";
+import { getOptions, checkIsValidFile } from "../../helper";
 
 export function Employer() {
   const [data, setData] = useState([]);
@@ -10,12 +9,11 @@ export function Employer() {
   const [skills, setSkills] = React.useState([]);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  const response = useGetEmployerJobs();
   let errorsObj = {
     file: "Attachment Size should be less than 16KB ",
     field: "Please fill all the details details"
   };
-  
+
   useEffect(() => {
     fetch("/data/employerJobs.json", {
       headers: {
@@ -38,40 +36,22 @@ export function Employer() {
     }
   });
 
-  //initial setting data in itemList
-  // useEffect(() => {
-  //   if (jobs?.length == 0) {
-  //     setJobs(response.data);
-  //   }
-  // });
-
   function handleUpload(event) {
-    const filesize = event.target.files[0].size;
-    if (typeof event.target.files[0].name != "undefined" && filesize <= 16000) {
-      console.log("yayyyy");
+    if (checkIsValidFile(event.target.files[0])) {
+      return;
     } else {
       setError(true);
       setErrorMsg(errorsObj.file);
-      console.log("Something went wrong");
     }
   }
 
-  const getOptions = (number, prefix = "Skill ") =>
-    _.times(number, index => ({
-      key: index,
-      text: `${prefix}${index}`,
-      value: index
-    }));
-
   function submit(e) {
-    const length = e.target.elements.length;
     const obj = {};
     const jobId = e.target.elements[0].value;
     const companyName = "Test Company";
     const Position = e.target.elements[1].value;
     const Department = e.target.elements[2].value;
     const job = e.target.elements[5].value;
-    //const jd = e.target.elements[6].files[0].name;
     if (jobId == "" || Department == "" || Position == "") {
       setError(true);
       setErrorMsg(errorsObj.field);

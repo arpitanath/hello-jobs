@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 
-export function useGetEmployerJobs() {
-  const [response, setData] = useState([]);
-  useEffect(() => {
+export default function GetEmployerJobs() {
+  let  response;
     fetch("/data/employerJobs.json", {
       headers: {
         "Content-Type": "application/json",
@@ -13,8 +11,8 @@ export function useGetEmployerJobs() {
         return res.json();
       })
       .then(res => {
-        setData(res);
+        return res;
       });
-  },[]);
-  return {response};
+  
+ 
 }

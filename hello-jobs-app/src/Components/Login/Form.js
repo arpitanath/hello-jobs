@@ -41,7 +41,7 @@ function onLogin(e) {
 
   return (
     <div>
-    <h2 class="heading">Don't Miss out on your next Oppurtunity</h2>
+    <h2 class="headingLogin">Don't Miss out on your next Oppurtunity</h2>
     <div className="form-inner">
     
       <Form onSubmit={onLogin}>
