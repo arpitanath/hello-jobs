@@ -1,24 +1,69 @@
-import React from "react";
-import _ from 'lodash'
-import { Button, Checkbox, Icon, Table } from "semantic-ui-react";
-import { Dropdown, Modal, Select, Form } from "semantic-ui-react";
+import React, { useState, useEffect } from "react";
+import _ from "lodash";
+import { Button, Icon, Table } from "semantic-ui-react";
+import { Modal, Form } from "semantic-ui-react";
 
 function Employer() {
+  const [data, setData] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [file, setFile] = React.useState("");
+  const [jobs, setJobs] = React.useState([]);
+  const [skills, setSkills] = React.useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    fetch("/data/employerJobs.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        setData(res);
+      });
+  });
+
+  //initial setting data in itemList
+  useEffect(() => {
+    if (jobs.length == 0) {
+      setJobs(data);
+    }
+  });
+
   function handleUpload(event) {
     setFile(event.target.files[0]);
-
-    // Add code here to upload file to server
-    // ...
   }
 
-  const getOptions = (number, prefix = 'Skill ') =>
-  _.times(number, (index) => ({
-    key: index,
-    text: `${prefix}${index}`,
-    value: index,
-  }))
+  const getOptions = (number, prefix = "Skill ") =>
+    _.times(number, index => ({
+      key: index,
+      text: `${prefix}${index}`,
+      value: index
+    }));
+
+  function submit(e) {
+    const length = e.target.elements.length;
+    const obj = {};
+    const jobId = e.target.elements[0].value;
+    const companyName = e.target.elements[1].value;
+    const Position = e.target.elements[2].value;
+    const Department = e.target.elements[3].value;
+    const job = e.target.elements[5].value;
+    //const jd = e.target.elements[6].files[0].name;
+    if (jobId == "" || Department == "" || Position == "") {
+      setError(true);
+      return false;
+    }
+    obj["id"] = jobId;
+    obj["Department"] = Department;
+    obj["Position"] = Position;
+    obj["Applicants"] = 0;
+    setJobs(d => [...d, obj]);
+    setOpen(false);
+  }
 
   return (
     <div className="job-list">
@@ -33,24 +78,16 @@ function Employer() {
         </Table.Header>
 
         <Table.Body>
-          <Table.Row>
-            <Table.Cell>1452828</Table.Cell>
-            <Table.Cell>ITG/QA</Table.Cell>
-            <Table.Cell>Senior Software Engineer (Front End)</Table.Cell>
-            <Table.Cell>0</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>172524</Table.Cell>
-            <Table.Cell>QuickBooks Org</Table.Cell>
-            <Table.Cell>Staff Software Engineer</Table.Cell>
-            <Table.Cell>5</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell>626281</Table.Cell>
-            <Table.Cell>Production</Table.Cell>
-            <Table.Cell>SDE 2</Table.Cell>
-            <Table.Cell>7</Table.Cell>
-          </Table.Row>
+          {jobs &&
+            jobs.map(item => (
+              <Table.Row>
+                <Table.Cell>{item?.id}</Table.Cell>
+                <Table.Cell>{item?.Department}</Table.Cell>
+                <Table.Cell>{item?.Position}</Table.Cell>
+                <Table.Cell>
+                </Table.Cell>
+              </Table.Row>
+            ))}
         </Table.Body>
 
         <Table.Footer fullWidth>
@@ -74,62 +111,61 @@ function Employer() {
               >
                 <Modal.Header>Post Job</Modal.Header>
                 <Modal.Content>
-                  <Form>
+                  <Form onSubmit={submit}>
+                    {error && (
+                      <span style={{ color: "red" }}>
+                        Please fill all the fields
+                      </span>
+                    )}
                     <Form.Group widths="equal">
+                      <Form.Input fluid label="Job ID" placeholder="Job ID" />
                       <Form.Input fluid label="Company" placeholder="Company" />
-                     
+
                       <Form.Input
                         fluid
-                        label="Contact Person"
-                        placeholder="Contact Person"
+                        label="Position"
+                        placeholder="Position"
                       />
-                    
+                      <Form.Input
+                        fluid
+                        label="Department"
+                        placeholder="Department"
+                      />
                     </Form.Group>
                     <Form.Group widths="equal">
-                    
                       <Form.Dropdown
-                      label="Skills"
+                        label="Skills"
                         multiple
                         search
                         selection
                         options={getOptions(5)}
                         placeholder="Select Skills"
+                        onChange={e => {
+                          setSkills(a => [...a, e.target.innerText]);
+                        }}
                       />
-                     
-                    
                     </Form.Group>
-                  
+
                     <Form.Group widths="equal">
-                       
-                    <Form.TextArea
-                      label="Job requirements"
-                      placeholder="Tell us more about you..."
-                    />
-                   </Form.Group>
-                
+                      <Form.TextArea
+                        label="Job requirements"
+                        placeholder="Tell us more about you..."
+                      />
+                    </Form.Group>
+
                     <label>Upload Job Description</label>
                     <br></br>
                     <br></br>
                     <input type="file" onChange={handleUpload} />
                     <br></br>
                     <br></br>
-                    <Form.Button>Submit</Form.Button>
+                    <Form.Button>Upload Job</Form.Button>
                   </Form>
                 </Modal.Content>
                 <Modal.Actions>
                   <Button color="black" onClick={() => setOpen(false)}>
                     Close
                   </Button>
-                  <Button
-                    content="Add Job"
-                    labelPosition="right"
-                    icon="checkmark"
-                    onClick={() => {
-                      // setSkillsData(skillsData);
-                      setOpen(false);
-                    }}
-                    positive
-                  />
                 </Modal.Actions>
               </Modal>
             </Table.HeaderCell>
