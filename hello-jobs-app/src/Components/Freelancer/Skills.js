@@ -38,7 +38,7 @@ export function Skills() {
               onOpen={() => setOpen(true)}
               open={open}
               trigger={
-                <Button>
+                <Button  color="black">
                   Add Skills
                 </Button>
               }

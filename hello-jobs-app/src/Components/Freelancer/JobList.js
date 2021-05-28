@@ -119,8 +119,8 @@ export function JobList() {
                       </Table.Cell>
                       <Table.Cell>
                         <Button
-                          basic
-                          color="green"
+                          
+                          color="black"
                           onClick={e => {
                             e.target.innerText = `Applied SuccessFully to job ${item.id}`;
                             e.target.disabled = true;

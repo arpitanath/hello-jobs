@@ -18,11 +18,11 @@ code {
 .form-inner {
   border-radius: 5px;
   background-color: #f2f2f2;
-  width: 50%;
+  max-width: 500px;
   padding:20px;
   margin:auto;
   box-shadow: darkgray;
-  box-shadow: 10px 10px 5px grey;
+  box-shadow: 10px 10px 5px grey
 }
 
 .form-inner2 {
@@ -65,24 +65,17 @@ h2{
 .headerBanner {
     padding: 20px;
     text-align: left;
-    background:#0b641e;
+    background:hsl(210deg 90% 40%);
     color: white;
     font-size: 10px;
     margin-bottom: 10px;
   }
   
-  .footer{
-    background:#27432d;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    color: white;
-    text-align: end;
-  }
+ 
 
   .form-freelancer{
     margin:30px;
+    
   }
 
   .form-freelancer > form{
@@ -174,18 +167,24 @@ h2{
     margin: 15px;
   }
 
-  /* .ui.card>.content,
-.ui.cards>.card>.content {
-  background-color:lightgoldenrodyellow;
-} */
-
 .ui.card>.content>.header,
 .ui.cards>.card>.content {
-  background-color: lightsteelblue;
-  padding:10px;
+  background-color:#f2f2f2;
+  padding:15px;
 }
 
 .ui.card>.content.extra
 .ui.cards>.card>.content.extra {
   background-color: lightgoldenrodyellow;
+}
+
+.headingLogin{
+  margin: 20px;
+}
+
+.logout{
+  position: relative;
+  top:0px;
+  right:0px;
+  margin:15px;
 }

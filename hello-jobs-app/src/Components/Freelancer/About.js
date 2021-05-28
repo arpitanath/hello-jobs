@@ -15,6 +15,7 @@ export function About() {
           <Card.Content extra id="summary">
             {isEditing && (
               <Button
+              color="black"
                 onClick={e => {
                   setIsEditing(false);
                   e.target.parentElement.previousElementSibling.contentEditable =
@@ -26,6 +27,7 @@ export function About() {
             )}
             {!isEditing && (
               <Button
+              color="black"
                 onClick={e => {
                   setIsEditing(true);
                   e.target.parentElement.previousElementSibling.contentEditable =

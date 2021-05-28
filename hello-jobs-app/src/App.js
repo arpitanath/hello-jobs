@@ -2,10 +2,10 @@ import React from "react";
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
 import { Freelancer, JobList } from "./Components/Freelancer";
-import {Employer} from "./Components/Employer";
+import { Employer } from "./Components/Employer";
 import { LoginForm } from "./Components/Login";
 import { Banner } from "./Components/Page";
-import { Button } from "semantic-ui-react";
+import { GoBack, GoToJobs, Logout } from "./Components/Buttons";
 
 function App() {
   return (
@@ -18,35 +18,22 @@ function App() {
           </Route>
           <Route path="/freelancer">
             <div class="btnjobs">
-              <Button
-                className="bannerBtn"
-                type="button"
-                onClick={() => {
-                  history.push("/jobs");
-                }}
-              >
-                <i class="envelope icon"></i>
-                Jobs
-              </Button>
+              <GoToJobs />
+              <Logout />
             </div>
             <Freelancer />
           </Route>
           <Route path="/jobs">
             <div class="btnjobs">
-              <Button
-                className="bannerBtn"
-                type="button"
-                onClick={() => {
-                  history.push("/freelancer");
-                }}
-              >
-                <i class="backward icon"></i>
-                Go Back
-              </Button>
+              <GoBack />
+              <Logout />
             </div>
             <JobList />
           </Route>
           <Route path="/employer">
+            <div class="btnjobs">
+              <Logout />
+            </div>
             <Employer />
           </Route>
         </Switch>

@@ -13,6 +13,7 @@ export function Experience() {
           />
           <Card.Content extra id="Experience">
           {isEditing && <Button
+           color="black"
               onClick={e => {
                 setIsEditing(false);
                e.target.parentElement.previousElementSibling.contentEditable = "false";
@@ -21,6 +22,7 @@ export function Experience() {
               Save
             </Button>}
            {!isEditing &&  <Button
+            color="black"
               onClick={e => {
                 setIsEditing(true);
                e.target.parentElement.previousElementSibling.contentEditable = "true";

@@ -51,7 +51,7 @@ export function Projects() {
               onOpen={() => setOpen(true)}
               open={open}
               trigger={
-                <Button>
+                <Button  color="black">
                   Add Projects from Git
                 </Button>
               }

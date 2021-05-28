@@ -40,7 +40,10 @@ function onLogin(e) {
   }
 
   return (
+    <div>
+    <h2 class="heading">Don't Miss out on your next Oppurtunity</h2>
     <div className="form-inner">
+    
       <Form onSubmit={onLogin}>
         <Form.Field>
           <span style={{ color: "red" }}>{errors.email}</span>
@@ -68,8 +71,10 @@ function onLogin(e) {
           placeholder="Select"
           onChange={e => setType(e.target.innerText)}
         />
-        <Form.Field control={Button}>Sign In</Form.Field>
+        <Form.Field  color="black" control={Button}>Sign In</Form.Field>
       </Form>
+      
+    </div>
     </div>
   );
 }
